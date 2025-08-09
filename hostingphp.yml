@@ -2,7 +2,7 @@ project_name: Pegadaianku
 framework: laravel
 database:
   name: pegadaianku
-  user: restoranku
+  user: pegadaianku
   password: 12345
   host: localhost
   port: 3306
