@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Direct Access</title>
+    <style>
+        .test-box { margin: 20px; padding: 20px; border: 2px solid #ccc; }
+        .success { border-color: green; background: #f0fff0; }
+        .error { border-color: red; background: #fff0f0; }
+        img { max-width: 200px; margin: 10px; border: 1px solid #999; }
+        .status { font-weight: bold; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Test Direct Access to Photos</h1>
+    
+    <div class="test-box" id="test1">
+        <h2>Test 1: First Photo</h2>
+        <p><strong>URL:</strong> <a href="http://127.0.0.1:8000/storage/transaction_photos/1754250604_688fbd6c6ce4b.jpg" target="_blank">http://127.0.0.1:8000/storage/transaction_photos/1754250604_688fbd6c6ce4b.jpg</a></p>
+        <div class="status" id="status1">Loading...</div>
+        <img id="img1" src="http://127.0.0.1:8000/storage/transaction_photos/1754250604_688fbd6c6ce4b.jpg" alt="Photo 1">
+    </div>
+    
+    <div class="test-box" id="test2">
+        <h2>Test 2: Second Photo</h2>
+        <p><strong>URL:</strong> <a href="http://127.0.0.1:8000/storage/transaction_photos/1754251515_688fc0fb259da.png" target="_blank">http://127.0.0.1:8000/storage/transaction_photos/1754251515_688fc0fb259da.png</a></p>
+        <div class="status" id="status2">Loading...</div>
+        <img id="img2" src="http://127.0.0.1:8000/storage/transaction_photos/1754251515_688fc0fb259da.png" alt="Photo 2">
+    </div>
+    
+    <div class="test-box">
+        <h2>Instructions:</h2>
+        <ol>
+            <li>If images show green border: ✅ Files are accessible</li>
+            <li>If images show red border: ❌ 403/404 error - check console</li>
+            <li>Click the URLs above to test direct access</li>
+            <li>Check browser console for specific error messages</li>
+        </ol>
+    </div>
+    
+    <script>
+        function testImage(imgId, statusId, testBoxId) {
+            const img = document.getElementById(imgId);
+            const status = document.getElementById(statusId);
+            const testBox = document.getElementById(testBoxId);
+            
+            img.onload = function() {
+                if (this.complete && this.naturalHeight > 0) {
+                    status.textContent = '✅ SUCCESS - Image loaded';
+                    status.style.color = 'green';
+                    testBox.className = 'test-box success';
+                } else {
+                    status.textContent = '❌ FAILED - Image not loaded';
+                    status.style.color = 'red';
+                    testBox.className = 'test-box error';
+                }
+            };
+            
+            img.onerror = function() {
+                status.textContent = '❌ ERROR - Failed to load (403/404)';
+                status.style.color = 'red';
+                testBox.className = 'test-box error';
+                console.error('Failed to load:', this.src);
+            };
+            
+            // Force reload
+            img.src = img.src + '?t=' + Date.now();
+        }
+        
+        // Test both images
+        testImage('img1', 'status1', 'test1');
+        testImage('img2', 'status2', 'test2');
+        
+        // Also test after page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                testImage('img1', 'status1', 'test1');
+                testImage('img2', 'status2', 'test2');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

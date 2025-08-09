@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test New Photo Paths</title>
+    <style>
+        .test-box { margin: 20px; padding: 20px; border: 2px solid #ccc; }
+        .success { border-color: green; background: #f0fff0; }
+        .error { border-color: red; background: #fff0f0; }
+        .status { font-weight: bold; margin: 10px 0; }
+        iframe { width: 100%; height: 200px; border: 1px solid #999; }
+    </style>
+</head>
+<body>
+    <h1>Test New Photo Paths - After Fix</h1>
+    
+    <div class="test-box" id="test1">
+        <h2>Test 1: New Path (photos/transaction_photos/)</h2>
+        <p><strong>URL:</strong> <a href="http://127.0.0.1:8000/photos/transaction_photos/1754250604_688fbd6c6ce4b.jpg" target="_blank">http://127.0.0.1:8000/photos/transaction_photos/1754250604_688fbd6c6ce4b.jpg</a></p>
+        <div class="status" id="status1">Loading...</div>
+        <iframe id="frame1" src="http://127.0.0.1:8000/photos/transaction_photos/1754250604_688fbd6c6ce4b.jpg"></iframe>
+    </div>
+    
+    <div class="test-box" id="test2">
+        <h2>Test 2: New Path (photos/transaction_photos/)</h2>
+        <p><strong>URL:</strong> <a href="http://127.0.0.1:8000/photos/transaction_photos/1754251515_688fc0fb259da.png" target="_blank">http://127.0.0.1:8000/photos/transaction_photos/1754251515_688fc0fb259da.png</a></p>
+        <div class="status" id="status2">Loading...</div>
+        <iframe id="frame2" src="http://127.0.0.1:8000/photos/transaction_photos/1754251515_688fc0fb259da.png"></iframe>
+    </div>
+    
+    <div class="test-box" id="test3">
+        <h2>Test 3: Directory Test</h2>
+        <p><strong>URL:</strong> <a href="http://127.0.0.1:8000/storage/transaction_photos/test.txt" target="_blank">http://127.0.0.1:8000/storage/transaction_photos/test.txt</a></p>
+        <div class="status" id="status3">Loading...</div>
+        <iframe id="frame3" src="http://127.0.0.1:8000/storage/transaction_photos/test.txt"></iframe>
+    </div>
+    
+    <div class="test-box">
+        <h2>Next Steps:</h2>
+        <ol>
+            <li>If Test 1 & 2 show HTML content: ✅ New path works</li>
+            <li>If Test 3 shows text: ✅ Directory access works</li>
+            <li>Refresh transaction page: <a href="http://127.0.0.1:8000/transactions/1" target="_blank">http://127.0.0.1:8000/transactions/1</a></li>
+            <li>Check if debug info shows new URLs</li>
+        </ol>
+    </div>
+    
+    <script>
+        function checkFrame(frameId, statusId, testBoxId) {
+            const frame = document.getElementById(frameId);
+            const status = document.getElementById(statusId);
+            const testBox = document.getElementById(testBoxId);
+            
+            frame.onload = function() {
+                try {
+                    const content = this.contentDocument || this.contentWindow.document;
+                    if (content && content.body) {
+                        status.textContent = '✅ SUCCESS - Content loaded';
+                        status.style.color = 'green';
+                        testBox.className = 'test-box success';
+                    } else {
+                        status.textContent = '❌ FAILED - No content';
+                        status.style.color = 'red';
+                        testBox.className = 'test-box error';
+                    }
+                } catch (e) {
+                    status.textContent = '✅ SUCCESS - Content loaded (cross-origin)';
+                    status.style.color = 'green';
+                    testBox.className = 'test-box success';
+                }
+            };
+            
+            frame.onerror = function() {
+                status.textContent = '❌ ERROR - Failed to load';
+                status.style.color = 'red';
+                testBox.className = 'test-box error';
+            };
+        }
+        
+        // Check all frames
+        setTimeout(() => {
+            checkFrame('frame1', 'status1', 'test1');
+            checkFrame('frame2', 'status2', 'test2');
+            checkFrame('frame3', 'status3', 'test3');
+        }, 2000);
+    </script>
+</body>
+</html>

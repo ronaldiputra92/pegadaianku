@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="300" height="200" fill="#e8f4fd" stroke="#3b82f6" stroke-width="2"/>
+    <text x="150" y="70" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#1e40af">
+        📷 Foto Barang
+    </text>
+    <text x="150" y="100" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">
+        1754251834_688fc23a500e7.png
+    </text>
+    <text x="150" y="130" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#6b7280">
+        Placeholder Image - 300x200
+    </text>
+    <text x="150" y="150" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#6b7280">
+        Replace with actual photo
+    </text>
+</svg>

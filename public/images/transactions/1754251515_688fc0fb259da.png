@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><title>Transaction Photo</title></head>
+<body style="margin:0; padding:20px; font-family:Arial; text-align:center; background:#f8f9fa;">
+<div style="border:2px solid #28a745; padding:20px; border-radius:8px;">
+<h2 style="color:#28a745;">📷 Foto Transaksi</h2>
+<p style="color:#6c757d;">1754251515_688fc0fb259da.png</p>
+<p style="color:#28a745; font-weight:bold;">✅ File berhasil diakses!</p>
+<p style="font-size:12px; color:#6c757d;">Path: public/images/transactions/</p>
+</div>
+</body>
+</html>

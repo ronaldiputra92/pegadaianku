@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head><title>Photo Placeholder</title></head>
+<body style="margin:0; padding:20px; font-family:Arial; text-align:center; background:#e0e0e0;">
+<h2>📷 Foto Barang</h2>
+<p>1754251515_688fc0fb259da.png</p>
+<p style="color:#666;">Placeholder - Replace with actual photo</p>
+<p style="color:#999; font-size:12px;">Located in: public/photos/transaction_photos/</p>
+</body>
+</html>
