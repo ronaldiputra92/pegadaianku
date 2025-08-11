@@ -42,6 +42,22 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Drop foreign keys dari tabel yang terkait dengan customers
+        Schema::table('pawn_transactions', function (Blueprint $table) {
+            // Hapus foreign key jika ada
+            if (Schema::hasColumn('pawn_transactions', 'customer_id')) {
+                $table->dropForeign(['customer_id']);
+            }
+        });
+
+        Schema::table('customer_documents', function (Blueprint $table) {
+            // Hapus foreign key jika ada
+            if (Schema::hasColumn('customer_documents', 'customer_id')) {
+                $table->dropForeign(['customer_id']);
+            }
+        });
+
+        // Hapus tabel customers
         Schema::dropIfExists('customers');
     }
 };
